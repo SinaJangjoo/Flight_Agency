@@ -1,0 +1,438 @@
+﻿<html>
+<head>
+    <title></title>
+</head>
+<body>
+    @model FlightViewModel
+    @{
+        var selectCity = ViewData["selectCity"] as List<string>;
+    }
+    <!-- Content -->
+    <div class="page-content bg-white">
+        <!-- Section Banner -->
+        <div class="dlab-bnr-inr dlab-bnr-inr-md bnr-style1" style="background-image:url(Layout/images/main-slider/slide7.jpg); background-size: cover;" id="dezParticles">
+            <div class="container">
+                <div class="dlab-bnr-inr-entry align-m dlab-home">
+                    <div class="bnr-content">
+                        <h2>بهترین پرواز ها را با ما تجربه کنید</h2>
+                        <br />
+                        <p>رزرو آنلاین پرواز های داخلی و خارجی با ...</p>
+                    </div>
+                    <div class="search-filter filter-style1">
+                        <form asp-action="SearchFlight" asp-controller="Home">
+                            <div class="input-group">
+                                @*<input type="text" class="form-control" placeholder="دنبال چی میگردی؟">
+                                *@
+                                <div class="form-control">
+                                    <select asp-for="fromCityId">
+                                        <option>شهر مبدأ</option>
+                                        @foreach (var item in ViewData["cities"] as List<City>)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+
+                                    </select>
+                                </div>
+                                <div class="form-control">
+                                    <select asp-for="toCityId">
+                                        <option>شهر مقصد</option>
+                                        @foreach (var item in ViewData["cities"] as List<City>)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+
+                                    </select>
+                                </div>
+
+                                <input type="date" asp-for="departureTime" class="form-control" placeholder="تاریخ رفت">
+                                <div class="d-inline-flex flex-row bg-white align-items-center" style="width:25%">
+                                    <span class="bg-white col-8">تعداد مسافران</span>
+                                    <input type="number" id="passengerCount" class="form-control" asp-for="count" value="1" />
+                                </div>
+                                <div class="input-group-prepend">
+                                    <button class="site-button"> جستجو</button>
+                                </div>
+                            </div>
+                            <span asp-validation-for="departureTime"></span>
+                            <span asp-validation-for="count"></span>
+                        </form>
+                    </div>
+                    <div class="navbar scroll-button">
+                        <a href="#page_content" class="site-button button-style1 scroll"><i class="la la-long-arrow-down"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Section Banner END -->
+        <div class="content-block" id="page_content">
+            <!-- Featured Destinations -->
+            <!-- Featured Destinations End -->
+            <!-- Our Services -->
+            <div class="section-full bg-gray-1 content-inner about-us">
+                <div class="container-fluid">
+                    <div class="section-head text-black text-left text-center">
+                        <h2 class="box-title">مسیر های پر تردد</h2>
+                        <div class="dlab-separator bg-primary"></div>
+                        @*<p></p>*@
+                    </div>
+                    <div class="site-filters clearfix center m-b40 listing-filters">
+                        <ul class="filters" data-toggle="buttons">
+                            @for (int i = 0; i < selectCity.Count; i++)
+                            {
+                                @if (i == 0)
+                                {
+                                    <li class="btn active">
+                                        <input type="radio">
+                                        <a id="@(i+1)" onclick="FindDestination('/Home/FindDestination/'+@i)" href="javascript:void(0);" class="site-button-link"><span><i class="la la-plane"></i>@selectCity[i]</span></a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li data-filter="" class="btn">
+                                        <input type="radio">
+                                        <a onclick="FindDestination('/Home/FindDestination/'+@i)" href="javascript:void(0);" class="site-button-link"><span><i class="la la-plane"></i>@selectCity[i]</span></a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                    <div id="totalmasonry" class="clearfix">
+                        <ul id="masonry" class="dlab-gallery-listing gallery-grid-4 gallery row">
+                            <li class="near-by-you design card-container col-lg-3 col-md-6 col-sm-6">
+                                <div class="listing-bx featured-star-right m-b30 style-2">
+                                    <div class="listing-media">
+                                        <img src="~/Layout/images/listing/list2/pic7.jpg" alt="">
+
+                                    </div>
+                                    <div class="listing-info">
+                                        <h3 class="title"><a href="listing-details.html"></a></h3>
+                                        <ul class="place-info">
+                                            <li class="place-location"><i class="fa fa-map-marker"></i></li>
+                                            <li class="open"><i class="fa fa-check"></i>باز</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="popular-ratings photography card-container col-lg-3 col-md-6 col-sm-6">
+                                <div class="listing-bx featured-star-right m-b30 style-2">
+                                    <div class="listing-media">
+                                        <img src="~/Layout/images/listing/list2/pic2.jpg" alt="">
+                                        <ul class="wish-bx">
+                                            <li><a class="like-btn" href="javascript:void(0)"><i class="fa fa-heart"></i> لایک</a></li>
+                                        </ul>
+                                        <ul class="featured-star">
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="listing-info">
+                                        <h3 class="title"><a href="listing-details.html">مراقبت های بهداشتی</a></h3>
+                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده</p>
+                                        <ul class="place-info">
+                                            <li class="place-location"><i class="fa fa-map-marker"></i>12 /کیلومتر ، جدید</li>
+                                            <li class="open"><i class="fa fa-check"></i>باز</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="latest-listings photography card-container col-lg-3 col-md-6 col-sm-6">
+                                <div class="listing-bx featured-star-right m-b30 style-2">
+                                    <div class="listing-media">
+                                        <img src="~/Layout/images/listing/list2/pic3.jpg" alt="">
+                                        <ul class="wish-bx">
+                                            <li><a class="like-btn" href="javascript:void(0)"><i class="fa fa-heart"></i> لایک</a></li>
+                                        </ul>
+                                        <ul class="featured-star">
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="listing-info">
+                                        <h3 class="title"><a href="listing-details.html">فروشگاه کشاورزی</a></h3>
+                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده</p>
+                                        <ul class="place-info">
+                                            <li class="place-location"><i class="fa fa-map-marker"></i>12 /کیلومتر ، جدید</li>
+                                            <li class="open"><i class="fa fa-check"></i>باز</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="near-by-you latest-listings card-container col-lg-3 col-md-6 col-sm-6">
+                                <div class="listing-bx featured-star-right m-b30 style-2">
+                                    <div class="listing-media">
+                                        <img src="~/Layout/images/listing/list2/pic4.jpg" alt="">
+                                        <ul class="wish-bx">
+                                            <li><a class="like-btn" href="javascript:void(0)"><i class="fa fa-heart"></i> لایک</a></li>
+                                        </ul>
+                                        <ul class="featured-star">
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="listing-info">
+                                        <h3 class="title"><a href="listing-details.html">فروشگاه ارگانیک</a></h3>
+                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده</p>
+                                        <ul class="place-info">
+                                            <li class="place-location"><i class="fa fa-map-marker"></i>12 /کیلومتر ، جدید</li>
+                                            <li class="open"><i class="fa fa-check"></i>باز</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="near-by-you popular-ratings card-container col-lg-3 col-md-6 col-sm-6">
+                                <div class="listing-bx featured-star-right m-b30 style-2">
+                                    <div class="listing-media">
+                                        <img src="~/Layout/images/listing/list2/pic5.jpg" alt="">
+                                        <ul class="wish-bx">
+                                            <li><a class="like-btn" href="javascript:void(0)"><i class="fa fa-heart"></i> لایک</a></li>
+                                        </ul>
+                                        <ul class="featured-star">
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="listing-info">
+                                        <h3 class="title"><a href="listing-details.html">باغ وحش وینزی</a></h3>
+                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده</p>
+                                        <ul class="place-info">
+                                            <li class="place-location"><i class="fa fa-map-marker"></i>12 /کیلومتر ، جدید</li>
+                                            <li class="open"><i class="fa fa-check"></i>باز</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="popular-ratings latest-listings photography card-container col-lg-3 col-md-6 col-sm-6">
+                                <div class="listing-bx featured-star-right m-b30 style-2">
+                                    <div class="listing-media">
+                                        <img src="~/Layout/images/listing/list2/pic6.jpg" alt="">
+                                        <ul class="wish-bx">
+                                            <li><a class="like-btn" href="javascript:void(0)"><i class="fa fa-heart"></i> لایک</a></li>
+                                        </ul>
+                                        <ul class="featured-star">
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="listing-info">
+                                        <h3 class="title"><a href="listing-details.html">فروشگاه پیتزا KFC</a></h3>
+                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده</p>
+                                        <ul class="place-info">
+                                            <li class="place-location"><i class="fa fa-map-marker"></i>12 /کیلومتر ، جدید</li>
+                                            <li class="open"><i class="fa fa-check"></i>باز</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="near-by-you popular-ratings card-container col-lg-3 col-md-6 col-sm-6">
+                                <div class="listing-bx featured-star-right m-b30 style-2">
+                                    <div class="listing-media">
+                                        <img src="~/Layout/images/listing/list2/pic1.jpg" alt="">
+                                        <ul class="wish-bx">
+                                            <li><a class="like-btn" href="javascript:void(0)"><i class="fa fa-heart"></i> لایک</a></li>
+                                        </ul>
+                                        <ul class="featured-star">
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="listing-info">
+                                        <h3 class="title"><a href="listing-details.html">باغ وحش وینزی</a></h3>
+                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده</p>
+                                        <ul class="place-info">
+                                            <li class="place-location"><i class="fa fa-map-marker"></i>12 /کیلومتر ، جدید</li>
+                                            <li class="open"><i class="fa fa-check"></i>باز</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="popular-ratings latest-listings photography card-container col-lg-3 col-md-6 col-sm-6">
+                                <div class="listing-bx featured-star-right m-b30 style-2">
+                                    <div class="listing-media">
+                                        <img src="~/Layout/images/listing/list2/pic2.jpg" alt="">
+                                        <ul class="wish-bx">
+                                            <li><a class="like-btn" href="javascript:void(0)"><i class="fa fa-heart"></i> لایک</a></li>
+                                        </ul>
+                                        <ul class="featured-star">
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="listing-info">
+                                        <h3 class="title"><a href="listing-details.html">فروشگاه پیتزا KFC</a></h3>
+                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده</p>
+                                        <ul class="place-info">
+                                            <li class="place-location"><i class="fa fa-map-marker"></i>12 /کیلومتر ، جدید</li>
+                                            <li class="open"><i class="fa fa-check"></i>باز</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Our Services -->
+            <!-- Why Choose Us -->
+            <div class="section-full bg-img-fix bg-white content-inner">
+                <div class="container">
+                    <div class="section-head text-center">
+                        <h2 class="box-title">چگونه کار می کنیم؟</h2>
+                        <div class="dlab-separator bg-primary"></div>
+                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="icon-bx-wraper center work-box style1 m-b30">
+                                <div class="box-count">01</div>
+                                <div class="icon-bx-lg radius bg-gray-1 m-b20">
+                                    <a href="javascript:void(0)" class="icon-cell"><i class="ti-search text-primary"></i></a>
+                                </div>
+                                <div class="icon-content">
+                                    <h3 class="dlab-tilte">انتخاب کنید چه کار میکنید؟</h3>
+                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="icon-bx-wraper center work-box style1 m-b30">
+                                <div class="box-count">02</div>
+                                <div class="icon-bx-lg radius bg-gray-1 m-b20">
+                                    <a href="javascript:void(0)" class="icon-cell"><i class="ti-gift text-primary"></i></a>
+                                </div>
+                                <div class="icon-content">
+                                    <h3 class="dlab-tilte">آنچه می خواهید پیدا کنید؟</h3>
+                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="icon-bx-wraper center work-box style1 m-b30">
+                                <div class="box-count">03</div>
+                                <div class="icon-bx-lg radius bg-gray-1 m-b20">
+                                    <a href="javascript:void(0)" class="icon-cell"><i class="ti-rocket text-primary"></i></a>
+                                </div>
+                                <div class="icon-content">
+                                    <h3 class="dlab-tilte">مکان های شگفت انگیز</h3>
+                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Why Chose Us End -->
+            <!-- Online Community -->
+            <div class="section-full bg-white content-inner-2 bg-img-fix overlay-black-dark owl-out" style="background-image:url(Layout/images/background/bg1.jpg); background-position: left bottom;">
+                <div class="container">
+                    <div class="section-head text-center text-white">
+                        <h2 class="box-title">آنچه کاربران ما می گویند</h2>
+                        <div class="dlab-separator bg-primary"></div>
+                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div id="owl-demo" class="testimonial-one owl-loaded owl-theme owl-carousel owl-btn-center-lr owl-btn-3 btn-white owl-dots-primary-big style-2">
+                                    <div class="item">
+                                        <div class="testimonial-2 testimonial-bg">
+                                            <div class="testimonial-text">
+                                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده [...]</p>
+                                            </div>
+                                            <div class="testimonial-detail clearfix">
+                                                <div class="testimonial-pic quote-left radius shadow"><img src="~/Layout/images/testimonials/pic1.jpg" width="100" height="100" alt=""></div>
+                                                <strong class="testimonial-name">الناز سیدی</strong> <span class="testimonial-position">مشتری</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="testimonial-2 testimonial-bg">
+                                            <div class="testimonial-text">
+                                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده [...]</p>
+                                            </div>
+                                            <div class="testimonial-detail clearfix">
+                                                <div class="testimonial-pic quote-left radius shadow"><img src="~/Layout/images/testimonials/pic2.jpg" width="100" height="100" alt=""></div>
+                                                <strong class="testimonial-name">الناز سیدی</strong> <span class="testimonial-position">مشتری</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="testimonial-2 testimonial-bg">
+                                            <div class="testimonial-text">
+                                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده [...]</p>
+                                            </div>
+                                            <div class="testimonial-detail clearfix">
+                                                <div class="testimonial-pic quote-left radius shadow"><img src="~/Layout/images/testimonials/pic3.jpg" width="100" height="100" alt=""></div>
+                                                <strong class="testimonial-name">الناز سیدی</strong> <span class="testimonial-position">مشتری</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Online Community End -->
+            <!-- Featured Destinations -->
+            <!-- Featured Destinations End -->
+        </div>
+        <!-- contact area END -->
+    </div>
+    <!-- Content END-->
+    <script>
+        let tehran = document.getElementById("1")
+        tehran.addEventListener("load", FindDestination('/Home/FindDestination/?id=0'))
+        function FindDestination(url) {
+            $.ajax({
+                url: url,
+                type: 'POST',
+                success: function (value) {
+                    let htmlBody = `<ul id="masonry" class="dlab-gallery-listing gallery-grid-4 gallery row">`
+                    const d = new Date().toUTCString()
+                    $(value.destinations).each((index, val) => {
+                        htmlBody += ` <li class="near-by-you design card-container col-lg-3 col-md-6 col-sm-6">
+                                        <div class="listing-bx featured-star-right m-b30 style-2">
+                                            <div class="listing-media">
+                                                <img src="/Layout/images/listing/list2/pic7.jpg" alt="">
+
+                                            </div>
+                                            <div class="listing-info">
+                                                <h3 class="title"><a href="/Home/GetPopularFlights/?fromCity=${value.location}&&toCity=${val}&&date=${d}">${value.location} به ${val}</a></h3>
+                                                <ul class="place-info">
+                                                    <li class="place-location"><i class="fa fa-map-marker"> ${value.location}</i></li>
+                                                    <li class="open"><i class="fa fa-check"></i>باز</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>`
+                    })
+                    htmlBody += `</ul>`
+                    $('#totalmasonry').html(htmlBody)
+                }
+            })
+        }
+    </script>
+
+</body>
+</html>

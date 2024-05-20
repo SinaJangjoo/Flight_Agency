@@ -1,0 +1,295 @@
+﻿
+@{
+    ViewData["Title"] = "UpdateDelete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model List<Flight>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <!--Main container start -->
+    <main class="ttr-wrapper">
+        <div class="container-fluid">
+            <div class="db-breadcrumb">
+                <h4 class="breadcrumb-title">ویرایش / حذف پرواز</h4>
+                <ul class="db-breadcrumb-list">
+                    <li><a href="#"><i class="fa fa-home"></i>خانه</a></li>
+                    <li>ویرایش / حذف پرواز</li>
+                </ul>
+            </div>
+            <div class="row">
+                <!-- Your Profile Views Chart -->
+                <div class="col-lg-12 m-b30">
+                    <div class="widget-box">
+                        <div class="wc-title">
+                            <h4>ویرایش / حذف پرواز</h4>
+                        </div>
+                        <div class="widget-inner">
+                            <form asp-action="SearchFlight" asp-controller="Flight" class="edit-profile m-b1">
+                                <div class="row pb-2" style="border-bottom:solid 1px grey">
+                                    <div class="col-12">
+                                        <div class="ml-auto">
+                                            <h3>جستجو بر اساس مسیر و تاریخ</h3>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-6">
+                                        <label class="col-form-label">از:</label>
+                                        <div>
+                                            <select class="form-control" name="fromCityId">
+                                                <option></option>
+                                                @foreach (var item in TempData["cities"] as List<City>)
+                                                {
+                                                    <option value="@item.Id">@item.Name</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label class="col-form-label">به:</label>
+                                        <div>
+                                            <select class="form-control" name="toCityId">
+                                                <option></option>
+                                                @foreach (var item in TempData["cities"] as List<City>)
+                                                {
+                                                    <option value="@item.Id">@item.Name</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-6">
+                                        <label class="col-form-label">زمان شروع پرواز</label>
+                                        <div>
+                                            <input class="form-control" name="departureTime" type="datetime-local">
+                                        </div>
+                                    </div>
+                                    <div class="seperator"></div>
+
+
+                                    <div class="col-12">
+                                        <button class="btn btn-primary">جستجوی پرواز<i class="fa fa-fw fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="row" style="border-bottom:solid 1px grey">
+                                <div class="col-12" style="padding:0 0 0 20px">
+                                    <div class="form-group col-6">
+                                        <div class="wc-title" style="padding:20px 0 20px 30px">
+                                            <h4>جستجو براساس شماره پرواز</h4>
+                                        </div>
+                                        <label class="col-form-label">شماره پرواز:</label>
+                                        <div>
+                                            <input id="flightNumSearch" class="form-control" type="text" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row align-items-center pt-4" >
+                                <div class="col-2">
+                                    <span>فیلتر بر اساس : </span>
+                                </div>
+                                <div class="col-1 p-0">
+                                    <label>ایرلاین:</label>
+                                </div>
+                                <div class="col-2 p-0">
+                                    <select class="form-control">
+                                        <option></option>
+                                        @foreach (var item in TempData["airlines"] as List<Airline>)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Your Profile Views Chart END-->
+                <!-- Your Profile Views Chart -->
+                <div class="col-lg-12 m-b30">
+                    <div class="widget-box">
+                        <div class="wc-title">
+                            <h4>پرواز ها</h4>
+                        </div>
+                        <div class="widget-inner" id="searchContainer">
+                            @if (Model != null)
+                            {
+                                @foreach (var item in Model)
+                                {
+
+                                    <div class="card-courses-list admin-courses justify-content-around">
+                                        <div class="d-flex flex-column justify-content-between" style="max-width:150px;max-height:150px">
+                                            <img src="@($"data:image/jpeg;base64,{Convert.ToBase64String(item.Airline.LogoImage)}")" alt="" />
+                                            <div class="card-courses-user-info" style="text-align:center">
+                                                <h5>نوع ایرلاین</h5>
+                                                <h4>@($"{item.Airline.Name}")</h4>
+                                            </div>
+                                        </div>
+                                        <div class="card-courses-full-dec">
+                                            <div class="card-courses-title">
+                                                <h4>@($"{item.ToCity.Name} {item.ArrivalTime.Value.ToShortTimeString()}")<i class="fa fa-fw fa-long-arrow-left fa-3x"></i>@($"{item.DepartureTime.Value.ToShortTimeString()} {item.FromCity.Name}")</h4>
+                                            </div>
+                                            <div class="card-courses-list-bx">
+                                                <ul class="card-courses-view">
+                                                    <li class="card-courses-user">
+                                                        <div class="card-courses-user-info">
+                                                            <h5> شماره پرواز</h5>
+                                                            <h4>@($"{item.FlightNumber.ToString()}")</h4>
+                                                        </div>
+                                                    <li class="card-courses-categories">
+                                                        <h5> هواپیما</h5>
+                                                        <h4>@($"{item.Airplane.Name}")</h4>
+                                                    </li>
+                                                    <li class="card-courses-categories">
+                                                        <h5>کلاس پرواز</h5>
+                                                        <h4>@($"{item.ClassType.Name}")</h4>
+                                                    </li>
+                                                    <li class="card-courses-categories">
+                                                        <h5>مقدار بار مجاز</h5>
+                                                        <h4>@($"{item.AllowedCargoWeight.Value}") کیلوگرم</h4>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                            <div class="row card-courses-dec">
+                                                <div class="col-md-12">
+                                                    <a asp-action="EditFlight" asp-controller="Flight" asp-route-id="@item.Id" class="btn green radius-xl outline">ویرایش</a>
+                                                    <a onclick="DeleteAlert('/Flight/DeleteFlight/'+@(item.Id))" class="btn red outline radius-xl ">حذف</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row d-flex flex-column justify-content-center">
+                                            <div class="card-courses-price">
+                                                @*<del> 190 تومان </del>*@
+                                                <span>قیمت :</span>
+                                                <h5 class="text-primary">@($"{ item.Price:0,0}") تومان </h5>
+                                            </div>
+                                            <hr />
+                                            <div class="card-courses-price">
+                                                @*<del> 190 تومان </del>*@
+                                                @if (item.Capacity<=10)
+                                                {
+                                                <h5 class="text-primary" style="color:red">@($"{ item.Capacity.ToString()} صندلی باقی مانده") </h5>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <!-- Your Profile Views Chart END-->
+            </div>
+        </div>
+    </main>
+    <script>
+        $(() => {
+            $('#flightNumSearch').keyup(x => {
+                let txt = $(x.target).val();
+                $.post('/Flight/FlightNumSearch', { flightNumber: txt }, value => {
+                        let htmlBody = ""
+                    if (value && Object.keys(value).length > 0) {
+                        $(value).each((index, val) => {
+                            const departureTime = new Date(val.departureTime)
+                            const arrivalTime = new Date(val.arrivalTime)
+                            htmlBody += `<div class="card-courses-list admin-courses justify-content-around">
+                                    <div class="d-flex flex-column justify-content-between" style="max-width:150px;max-height:150px">
+                                        <img src="${val.airlineImg}" alt="" />
+                                        <div class="card-courses-user-info" style="text-align:center">
+                                            <h5>نوع ایرلاین</h5>
+                                            <h4>${val.airlineName}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="card-courses-full-dec">
+                                        <div class="card-courses-title">
+                                            <h4>${val.toCity}${arrivalTime.getHours()}:${arrivalTime.getMinutes()}<i class="fa fa-fw fa-long-arrow-left fa-3x"></i>${val.fromCity} ${departureTime.getHours()}:${departureTime.getMinutes()}</h4>
+                                        </div>
+                                        <div class="card-courses-list-bx">
+                                            <ul class="card-courses-view">
+                                                <li class="card-courses-user">
+                                                    <div class="card-courses-user-info">
+                                                        <h5> شماره پرواز</h5>
+                                                        <h4>${val.flightNumber}</h4>
+                                                    </div>
+
+                                                <li class="card-courses-categories">
+                                                    <h5> هواپیما</h5>
+                                                    <h4>${val.airplaneName}</h4>
+                                                </li>
+                                                <li class="card-courses-categories">
+                                                    <h5>کلاس پرواز</h5>
+                                                    <h4>${val.classType}</h4>
+                                                </li>
+                                                <li class="card-courses-categories">
+                                                    <h5>مقدار بار مجاز</h5>
+                                                    <h4>${val.allowCargoWeight} کیلوگرم</h4>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="row card-courses-dec">
+                                            <div class="col-md-12">
+                                                <a href="/Flight/EditFlight/?id=${val.id}" class="btn green radius-xl outline">ویرایش</a>
+                                                <a onclick="DeleteAlert('/Flight/DeleteFlight/${val.id}')" class="btn red outline radius-xl ">حذف</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex flex-column justify-content-center">
+                                        <div class="card-courses-price">
+                                            @*<del> 190 تومان </del>*@
+                                            <span>قیمت :</span>
+                                            <h5 class="text-primary">${val.price} تومان </h5>
+                                        </div>
+                                        <hr />
+                                        <div class="card-courses-price">
+                                            @*<del> 190 تومان </del>*@
+                                            <h5 class="text-primary" style="color:red">${val.capacity} صندلی باقی مانده </h5>
+                                        </div>
+                                    </div>
+                                </div>`
+                            $('#searchContainer').html(htmlBody)
+                        })
+                    } else {
+                        htmlBody = "<h5 class=\" text-danger text-center\">موردی یافت نشد</h5>"
+                        $('#searchContainer').html(htmlBody)
+                    }
+                })
+            })
+        })
+    </script>
+    <script>
+        function DeleteAlert(url) {
+            Swal.fire({
+                title: 'آیا از حذف این پرواز مطمئن هستید ؟',
+                text: "پرواز به طور دائمی حذف میشود !",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'بله ، حذف شود'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        type: 'DELETE',
+                        success: function (value) {
+                            if (value.success) {
+                                location.reload()
+                                toastr.success(@TempData["success"])
+                            } else {
+                                location.reload()
+                                toastr.success(@TempData["error"])
+                            }
+                        }
+
+                    })
+                }
+            })
+        }
+    </script>
+</body>
+</html>

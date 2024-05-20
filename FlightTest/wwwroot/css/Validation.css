@@ -1,0 +1,19 @@
+﻿.field-validation-error{
+    color:red;
+    font-size:12px;
+}
+.input-validation-error {
+    -moz-box-shadow: red 1px 1px;
+    -webkit-box-shadow: red 1px 1px;
+    box-shadow: red 1px 1px;
+}
+.passenger-input-toggle{
+    display:none;
+}
+
+.reservation-info {
+    background-color: rgba(249,233,87,0.7);
+    padding: 3px;
+    border-radius: 10px;
+    font-size: small;
+}

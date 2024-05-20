@@ -1,0 +1,48 @@
+﻿
+@{
+    Layout = null;
+    ViewData["Title"] = "TransactionAccepted";
+    var reservationCode = TempData["reservationCode"];
+}
+
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Layout/css/plugins.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Layout/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/Layout/css/templete.css">
+    <link class="skin" rel="stylesheet" type="text/css" href="~/Layout/css/skin/skin-4.css">
+
+</head>
+<body style="background-color:lightyellow">
+    <center>
+    <div class="col-lg-6 mb-4 mb-md-0 border-1 d-flex flex-row justify-content-center" style="background-color:rgb(169 233 173); margin-top:200px;border-radius:5px">
+        <div class="clearfix contact-form  m-b30">
+            <div class="section-head text-black">
+                <h3 class="box-title">نتیجه عملیات</h3>
+                <div class="dlab-separator bg-primary"></div>
+                <h5>@ViewData["dialog"]</h5>
+            </div>
+            <div class="dzFormMsg"></div>
+            <form method="post" class="dzForm" action="script/contact.php">
+                <input type="hidden" value="Contact" name="dzToDo">
+                <div class="row d-flex flex-row justify-content-center">
+                    <div class="col-md-6 ">
+                        <div class="form-group ">
+                            <div class="input-group">
+                                <input name="dzName" type="text" readonly class="form-control text-center" placeholder="@reservationCode">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <a asp-action="Index" asp-controller="Home" name="submit" value="Submit" class="site-button button-lg radius-xl">بازگشت به خانه</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    </center>
+</body>
+</html>
+
+
+

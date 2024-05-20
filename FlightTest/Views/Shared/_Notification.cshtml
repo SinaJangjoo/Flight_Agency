@@ -1,0 +1,16 @@
+﻿@if (TempData["success"] != null)
+{
+    <script src="~/js/toastr.js"></script>
+    <script type="text/javascript">
+        toastr.options.positionClass="toast-bottom-center"
+        toastr.success('@TempData["success"]')
+    </script>
+}
+@if (TempData["error"] != null)
+{
+    <script src="~/js/toastr.js"></script>
+    <script type="text/javascript">
+        toastr.options.positionClass="toast-bottom-center"
+        toastr.warning('@TempData["error"]')
+    </script>
+}

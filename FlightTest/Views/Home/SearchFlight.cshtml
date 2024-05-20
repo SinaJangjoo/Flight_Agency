@@ -1,0 +1,159 @@
+﻿
+@{
+    ViewData["Title"] = "SearchFlight";
+}
+@model List<Flight>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <!-- Content -->
+    <div class="page-content bg-white">
+        <!-- inner page banner -->
+        <!-- inner page banner END -->
+        <!-- contact area -->
+        <div class="content-block">
+            <div class="section-full content-inner bg-white">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-9 col-md-9">
+                            <div class="row">
+                                @foreach (var item in Model)
+                                {
+                                    <div class="col-lg-12">
+                                        <div class="listing-bx listing-half m-b30">
+                                            <div class="listing-media d-flex flex-column text-center">
+                                                <img src="@($"data:image/jpeg;base64,{Convert.ToBase64String(item.Airline.LogoImage)}")" alt="">
+                                                <div class="d-flex flex-column justify-content-between">
+                                                    <p class="text-black-50 mb-2">ایرلاین:</p>
+                                                    <h6>@item.Airline.Name</h6>
+                                                </div>
+                                            </div>
+                                            <div class="listing-info w-100 d-flex flex-column">
+                                                <div class="col-12 text-center">
+                                                    <h3 class="title">
+                                                        @($"{item.ToCity.Name} {item.ArrivalTime.Value.ToShortTimeString()} ")<i class="fa fa-fw fa-long-arrow-left fa-3x"></i>@($" {item.DepartureTime.Value.ToShortTimeString()} {item.FromCity.Name}")
+                                                    </h3>
+                                                </div>
+                                                <div class="d-flex flex-row justify-content-around">
+                                                    <div>
+                                                        <p class="text-black-50">هواپیما:</p>
+                                                        <h6>@item.Airplane.Name</h6>
+                                                    </div>
+                                                    <div>
+                                                        <p class="text-black-50">کلاس پرواز:</p>
+                                                        <h6>@item.ClassType.Name</h6>
+                                                    </div>
+                                                    <div>
+                                                        <p class="text-black-50">شماره پرواز:</p>
+                                                        <h6>@item.FlightNumber</h6>
+                                                    </div>
+                                                    <div>
+                                                        <p class="text-black-50">بار مجاز:</p>
+                                                        <h6>@item.AllowedCargoWeight کیلوگرم</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-column justify-content-around col-md-2">
+                                                <div>
+                                                    <h5>قیمت:</h5>
+                                                    <p>@($"{item.Price:0,0}") تومان</p>
+                                                </div>
+                                                @if (item.Capacity <= 10)
+                                                {
+                                                    <span class="text-primary" style="color:red"> @($"{item.Capacity} صندلی باقی مانده") </span>
+                                                }
+                                                @if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <a asp-action="Index" asp-controller="Reservation" asp-route-id="@item.Id" class="btn btn-primary">رزرو بلیط</a>
+                                                }
+                                                else
+                                                {
+                                                    <a asp-action="LoginRegister" asp-controller="Account" class="btn btn-primary">رزرو بلیط</a>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <!-- Pagination start -->
+                            <div class="pagination-bx clearfix text-center">
+                                <ul class="pagination">
+                                    <li class="previous"><a href="javascript:void(0)"><i class="fa fa-arrow-right"></i></a></li>
+                                    <li><a href="javascript:void(0)">1</a></li>
+                                    <li><a href="javascript:void(0)">2</a></li>
+                                    <li><a href="javascript:void(0)">...</a></li>
+                                    <li class="active"><a href="javascript:void(0)">7</a></li>
+                                    <li class="next"><a href="javascript:void(0)"><i class="fa fa-arrow-left"></i></a></li>
+                                </ul>
+                            </div>
+                            <!-- Pagination END -->
+                        </div>
+                        <div class="col-lg-3 col-md-3">
+                            <div class="sticky-top">
+                                <div class="listing-filter-sidebar">
+                                    <h4 class="title m-b30">فیلتر</h4>
+                                    <form>
+                                        <div class="form-group">
+                                            <select>
+                                                <option> دسته بندی</option>
+                                                
+                                            </select>
+                                        </div>
+                                        @*<div class="form-control">
+                                            <select asp-for="fromCityId">
+                                                <option>شهر مبدأ</option>
+                                                @foreach (var item in ViewData["cities"] as List<City>)
+                                                {
+                                                    <option value="@item.Id">@item.Name</option>
+                                                }
+
+                                            </select>
+                                        </div>*@
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="به :">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <select>
+                                                <option> دسته بندی</option>
+                                                <option>انتخاب سازه</option>
+                                                <option>هماهنگ کننده</option>
+                                                <option>کارفرما</option>
+                                                <option>شغل مالی</option>
+                                                <option>فناوری اطلاعات</option>
+                                                <option>بازاریابی</option>
+                                                <option>بررسی کیفیت</option>
+                                                <option>املاک و مستغلات</option>
+                                                <option>فروش</option>
+                                                <option>پشتیبانی</option>
+                                                <option>آموزش</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <div id="price-range">
+                                                <div class="price-slide-2 range-slider m-t30">
+                                                    <div class="price">
+                                                        <div id="slider-range-2"></div>
+                                                        <label>شعاع مقصد</label>
+                                                        <input type="text" id="distance" class="amount" readonly="" value="2کیلومتر - 100کیلومتر" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- contact area END -->
+    </div>
+    <!-- Content END-->
+</body>
+</html>
+

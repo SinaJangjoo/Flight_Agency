@@ -1,0 +1,181 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <meta name="robots" content="" />
+    <meta name="description" content="BizMap Directory & Listings HTML templates" />
+    <meta property="og:title" content="BizMap Directory & Listings HTML templates" />
+    <meta property="og:description" content="BizMap Directory & Listings HTML templates" />
+    <meta property="og:image" content="" />
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- FAVICONS ICON -->
+    <link rel="icon" href="~/Layout/images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/Layout/images/favicon.png" />
+
+    <!-- PAGE TITLE HERE -->
+    <title>قالب تبلیغاتی و ثبت آگهی بیزمپ</title>
+
+    <!-- MOBILE SPECIFIC -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--[if lt IE 9]>
+    <script src="~/Layout/js/html5shiv.min.js"></script>
+    <script src="~/Layout/js/respond.min.js"></script>
+    <![endif]-->
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" type="text/css" href="~/Layout/css/plugins.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Layout/plugins/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Layout/plugins/line-awesome/css/line-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Layout/plugins/flaticon/flaticon.css">
+    <link rel="stylesheet" type="text/css" href="~/Layout/plugins/flaticon/font/flaticon.css">
+    <link rel="stylesheet" type="text/css" href="~/Layout/plugins/themify/themify-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/Layout/plugins/simple-icon/css/simple-line-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/Layout/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/Layout/css/templete.css">
+    <link href="~/css/Validation.css" rel="stylesheet" />
+    <link class="skin" rel="stylesheet" type="text/css" href="~/Layout/css/skin/skin-4.css">
+
+    <!-- Google Font -->
+    <style>
+        @@import url('https://fonts.googleapis.com/css?family=Hind:300,400,500,600,700|Lato:100,100i,300,300i,400,400i,700,700i,900,900i|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i|PT+Serif:400,400i,700,700i|Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Roboto+Slab:100,300,400,700|Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Rubik:300,300i,400,400i,500,500i,700,700i,900,900i');
+    </style>
+    <!-- JAVASCRIPT FILES ========================================= -->
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Layout/js/combining.js"></script><!-- CONTACT JS  -->
+    <script src="~/Layout/js/dz.carousel.min.js"></script><!-- CONTACT JS  -->
+
+
+</head>
+<body id="bg">
+    <div id="loading-area"></div>
+    <div class="page-wraper">
+        <!-- Content -->
+        <div class="page-content dlab-login bg-primary" style="background-image: url(../../wwwroot/Layout/images/background/bg7.jpg); background-position: top right; background-blend-mode: screen; ">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-4 login-form-box">
+                        <div class="login-form">
+                            <div class="logo">
+                                <a href="index.html"><img src="~/Layout/images/logo-black-4.png" alt="" /></a>
+                            </div>
+                            <div class="tab-content nav">
+                                <partial name="_Login" />
+                                <div id="forgot-password" class="tab-pane fade">
+                                    <form class="dlab-form">
+                                        <h3 class="form-title m-t0">حساب کاربری را پیدا کن</h3>
+                                        <div class="form-group text-center">
+                                            <a href="#" class="site-button facebook btn-block"><i class="fa fa-facebook-official m-l10"></i> ورود از طریق فیسبوک</a>
+                                        </div>
+                                        <div class="form-group">
+                                            <input name="dzName" required="" class="form-control" placeholder="ایمیل خود را وارد کنید" type="text" />
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="site-button btn-block button-md">دریافت کلمه عبور جدید</button>
+                                        </div>
+                                        <div class="form-group">
+                                            <p class="info-bottom">
+                                                <a data-toggle="tab" href="#login" class="btn-link">ورود </a> |
+                                                <a data-toggle="tab" href="#register" class="btn-link">ثبت نام</a>
+                                            </p>
+                                        </div>
+                                    </form>
+                                </div>
+                                <partial name="_Register" />
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="content-info">
+                            <ul class="list-info">
+                                <li>
+                                    <div class="dlab-box">
+                                        <i class="fa fa-bullhorn"></i>
+                                        <p>از دوستان و متخصصان سفر مورد اعتماد خود مشاوره شخصی بگیرید</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="dlab-box">
+                                        <i class="fa fa-car"></i>
+                                        <p>به راحتی هتل ها ، کارهایی که باید انجام دهید و رستوران هایی که مناسب شما هستند پیدا کنید</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="dlab-box">
+                                        <i class="fa fa-check"></i>
+                                        <p>این همه آن چیزی است که شما باید بدانید</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Content END-->
+        <button class="scroltop fa fa-chevron-up"></button>
+    </div>
+
+
+    <!-- Modal -->
+    @if (TempData["msg"] != null)
+    {
+        <div class="modal fade modal-bx-info modal-lg" id="report-reviews" tabindex="-1" role="dialog" aria-labelledby="ReportReviewsModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog " role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ReportReviewsModalLongTitle">پیام سیستم</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="la la-close"></i></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="clearfix" >
+                            <p>@TempData["msg"]<span id="message"></span></p>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" data-dismiss="modal" class="site-button">بازگشت</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <!-- Modal End -->
+    <script>
+        $('#report-reviews').modal("toggle")
+    </script>
+        @if (TempData["isLockOut"]!=null&& (bool)TempData["isLockOut"]==true)
+        {
+            <script>
+                $(() => {
+                    $('#report-reviews').modal("show")
+                    let counter = 30
+                    let timer1 = setInterval(() => {
+                        if (counter == -1) {
+                            clearInterval(timer1)
+                            $('#message').html('')
+                            $('#report-reviews').modal("hide")
+                        } else {
+                            $('#message').html(`${counter--}`)
+                        }
+                    },1000)
+                })
+            </script>
+        }
+</body>
+</html>

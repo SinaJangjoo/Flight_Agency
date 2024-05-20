@@ -1,0 +1,307 @@
+﻿@inject UserManager<ApplicationUser> userManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <meta name="robots" content="" />
+    <meta name="description" content="BizMap Directory & Listings HTML templates" />
+    <meta property="og:title" content="BizMap Directory & Listings HTML templates" />
+    <meta property="og:description" content="BizMap Directory & Listings HTML templates" />
+    <meta property="og:image" content="" />
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- FAVICONS ICON -->
+    <link rel="icon" href="~/Layout/images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/Layout/images/favicon.png" />
+
+    <!-- PAGE TITLE HERE -->
+    <title>قالب تبلیغاتی و ثبت آگهی بیزمپ</title>
+
+    <!-- MOBILE SPECIFIC -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--[if lt IE 9]>
+    <script src="~/Layout/js/html5shiv.min.js"></script>
+    <script src="~/Layout/js/respond.min.js"></script>
+    <![endif]-->
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" type="text/css" href="~/Layout/css/plugins.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Layout/plugins/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Layout/plugins/line-awesome/css/line-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Layout/plugins/flaticon/flaticon.css">
+    <link rel="stylesheet" type="text/css" href="~/Layout/plugins/flaticon/font/flaticon.css">
+    <link rel="stylesheet" type="text/css" href="~/Layout/plugins/themify/themify-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/Layout/plugins/simple-icon/css/simple-line-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/Layout/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/Layout/css/templete.css">
+    <link class="skin" rel="stylesheet" type="text/css" href="~/Layout/css/skin/skin-4.css">
+
+
+    <link href="~/css/Validation.css" rel="stylesheet" />
+    <!-- Google Font -->
+
+    <style>
+        @@import url('https://fonts.googleapis.com/css?family=Hind:300,400,500,600,700|Lato:100,100i,300,300i,400,400i,700,700i,900,900i|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i|PT+Serif:400,400i,700,700i|Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Roboto+Slab:100,300,400,700|Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Rubik:300,300i,400,400i,500,500i,700,700i,900,900i');
+    </style>
+    <!-- JAVASCRIPT FILES ========================================= -->
+    <script src="~/Layout/js/combining.js"></script><!-- CONTACT JS  -->
+    <script src="~/Layout/js/dz.carousel.min.js"></script><!-- CONTACT JS  -->
+    <script src="~/Layout/plugins/particles/particles.js"></script>
+    <script src="~/Layout/plugins/particles/particles.app.js"></script>
+
+</head>
+<body id="bg">
+    <div id="loading-area"></div>
+    <div class="page-wraper font-roboto">
+        <!-- header -->
+        <header class="site-header header-transparent mo-right header-style3">
+            <!-- main header -->
+            <div class="sticky-header main-bar-wraper navbar-expand-lg">
+                <div class="main-bar clearfix onepage">
+                    <div class="container clearfix">
+                        <!-- website logo -->
+                        <div class="logo-header mostion">
+                            <a href="index.html" class="logo-1"><img src="~/Layout/images/logo-white-4.png" alt=""></a>
+                            <a href="index.html" class="logo-2"><img src="~/Layout/images/logo-black-4.png" alt=""></a>
+                        </div>
+                        <!-- nav toggle button -->
+                        <button class="navbar-toggler collapsed navicon justify-content-end" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                        <!-- extra nav -->
+                        <div class="extra-nav">
+                            <div class="extra-cell">
+                                @if (User.Identity.IsAuthenticated == false)
+                                {
+                                    <a asp-action="LoginRegister" asp-controller="Account" class="site-button radius-xl m-r10"><i class="ti-import m-l5 rotate-90"></i>ورود / ثبت نام</a>
+
+                                }
+
+
+                            </div>
+                        </div>
+                        <!-- main nav -->
+                        <div class="header-nav navbar-collapse collapse justify-content-end" id="navbarNavDropdown">
+                            <ul class="nav navbar-nav">
+                                <li class="down active">
+                                    <a href="#">خانه <i class="fa fa-chevron-down"></i></a>
+                                    <ul class="sub-menu">
+                                        <li><a href="index.html">خانه 1</a></li>
+                                        <li><a href="index-2.html">خانه 2<span class="tag-new">جدید</span></a></li>
+                                        <li><a href="index-3.html">خانه 3<span class="tag-new">جدید</span></a></li>
+                                    </ul>
+                                </li>
+                                <li class="down">
+                                    <a href="#">صفحات <i class="fa fa-chevron-down"></i></a>
+                                    <ul class="sub-menu">
+                                        <li><a href="coming-soon.html">به زودی</a></li>
+                                        <li><a href="error-404.html">خطای 404</a></li>
+                                        <li><a href="contact-us.html">تماس با ما</a></li>
+                                        <li><a href="register.html">ثبت نام<span class="tag-new">جدید</span></a></li>
+                                    </ul>
+                                </li>
+                                <li class="down">
+                                    <a href="#">تبلیغات <i class="fa fa-chevron-down"></i></a>
+                                    <ul class="sub-menu">
+                                        <li><a href="add-listing.html">ارسال تبلیغ<span class="tag-new">جدید</span></a></li>
+                                        <li>
+                                            <a href="#">تبلیغات <i class="fa fa-angle-left"></i></a>
+                                            <ul class="sub-menu">
+                                                <li><a href="listing.html">تبلیغات</a></li>
+                                                <li><a href="listing-left-sidebar.html">تبلیغ نوار کناری سمت چپ</a></li>
+                                                <li><a href="listing-right-sidebar.html">تبلیغ نوار کناری سمت راست</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#">فهرست بندی شبکه ای <i class="fa fa-angle-left"></i></a>
+                                            <ul class="sub-menu">
+                                                <li><a href="listing-grid-left-sidebar.html">نوار کناری سمت چپ</a></li>
+                                                <li><a href="listing-grid-right-sidebar.html">نوار کناری سمت راست</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#">نقشه <i class="fa fa-angle-left"></i></a>
+                                            <ul class="sub-menu">
+                                                <li><a href="listing-grid-map-left-sidebar.html">نوار کناری سمت چپ</a></li>
+                                                <li><a href="listing-grid-map-right-sidebar.html">نوار کناری سمت راست</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#">جزئیات تبلیغ <i class="fa fa-angle-left"></i></a>
+                                            <ul class="sub-menu">
+                                                <li><a href="listing-details.html">جزئیات تبلیغ 1</a></li>
+                                                <li><a href="listing-details-2.html">جزئیات تبلیغ 2<span class="tag-new">جدید</span></a></li>
+                                                <li><a href="listing-details-3.html">جزئیات تبلیغ 3<span class="tag-new">جدید</span></a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="down">
+                                    <a href="#">وبلاگ <i class="fa fa-chevron-down"></i></a>
+                                    <ul class="sub-menu">
+                                        <li><a href="blog-standard.html">وبلاگ</a></li>
+                                        <li><a href="blog-details.html">جزئیات وبلاگ</a></li>
+                                    </ul>
+                                </li>
+
+                                <li><a href="contact-us.html">تماس با ما</a></li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    var user = await userManager.FindByNameAsync(User.Identity.Name);
+                                    <li class="down">
+                                        @if (user.firstName == null && user.lastName == null)
+                                        {
+                                            <a href="#" class="site-button radius-xl m-r10">کاربر پیشفرض <i class="fa fa-chevron-down"></i></a>
+                                        }
+                                        else
+                                        {
+                                            <a href="#" class="site-button radius-xl m-r10">@($"{user.firstName} {user.lastName}")<i class="fa fa-chevron-down"></i></a>
+
+                                        }
+                                        <ul class="sub-menu">
+                                            @if (await userManager.IsInRoleAsync(user, "admins"))
+                                            {
+                                                <li><a asp-action="Index" asp-controller="Admin">پنل کاربری ادمین</a></li>
+                                            }
+                                            else
+                                            {
+                                            <li><a href="blog-standard.html">پنل کاربری</a></li>
+                                            }
+                                            <li><a asp-action="LogOut" asp-controller="Account">خروج از حساب</a></li>
+                                        </ul>
+                                    </li>
+
+
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- main header END -->
+        </header>
+        <!-- header END -->
+
+        @RenderBody()
+        <!-- Footer -->
+        <footer class="site-footer bg-black-2">
+            <div class="footer-top">
+                <div class="container saf-footer">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3 col-sm-6 footer-col-4">
+                            <div class="widget widget_getintuch">
+                                <h5 class="m-b30 text-white text-uppercase ">تماس با ما</h5>
+                                <ul>
+                                    <li><i class="ti-location-pin"></i><strong>آدرس</strong> ایران ، تهران ، زعفرانیه ، خیابان هستی ، ساختمان مهر </li>
+                                    <li><i class="ti-mobile"></i><strong>تلفن</strong>021-12345678</li>
+                                    <li><i class="ti-email"></i><strong>ایمیل</strong>info@example.com</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-3 col-sm-6 col-5 footer-col-4">
+                            <div class="widget widget_services border-0">
+                                <h5 class="m-b30 text-white text-uppercase ">شرکت</h5>
+                                <ul>
+                                    <li><a href="index.html">درباره ما </a></li>
+                                    <li><a href="index.html">خانه </a></li>
+                                    <li><a href="contact.html">تماس با ما</a></li>
+                                    <li><a href="about-1.html">درباره ما </a></li>
+                                    <li><a href="services-2.html">خدمات ما</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-3 col-sm-6 col-7 footer-col-4">
+                            <div class="widget widget_services border-0">
+                                <h5 class="m-b30 text-white text-uppercase ">لینک مفید</h5>
+                                <ul>
+                                    <li><a href="index.html">ایجاد حساب</a></li>
+                                    <li><a href="index.html">فلسفه شرکت </a></li>
+                                    <li><a href="contact.html">فرهنگ سازمانی</a></li>
+                                    <li><a href="about-1.html">نمونه کارها</a></li>
+                                    <li><a href="services-2.html">مدیریت مشتری</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3 col-sm-6 footer-col-4">
+                            <div class="widget widget_gallery gallery-grid-4">
+                                <h5 class="m-b30 text-white text-uppercase ">گالری</h5>
+                                <ul>
+                                    <li class="img-effect2"> <a href="javascript:void(0);"><img src="~/Layout/images/gallery/pic1.jpg" alt=""></a> </li>
+                                    <li class="img-effect2"> <a href="javascript:void(0);"><img src="~/Layout/images/gallery/pic2.jpg" alt=""></a> </li>
+                                    <li class="img-effect2"> <a href="javascript:void(0);"><img src="~/Layout/images/gallery/pic3.jpg" alt=""></a> </li>
+                                    <li class="img-effect2"> <a href="javascript:void(0);"><img src="~/Layout/images/gallery/pic4.jpg" alt=""></a> </li>
+                                    <li class="img-effect2"> <a href="javascript:void(0);"><img src="~/Layout/images/gallery/pic5.jpg" alt=""></a> </li>
+                                    <li class="img-effect2"> <a href="javascript:void(0);"><img src="~/Layout/images/gallery/pic6.jpg" alt=""></a> </li>
+                                    <li class="img-effect2"> <a href="javascript:void(0);"><img src="~/Layout/images/gallery/pic7.jpg" alt=""></a> </li>
+                                    <li class="img-effect2"> <a href="javascript:void(0);"><img src="~/Layout/images/gallery/pic8.jpg" alt=""></a> </li>
+                                    <li class="img-effect2"> <a href="javascript:void(0);"><img src="~/Layout/images/gallery/pic9.jpg" alt=""></a> </li>
+                                    <li class="img-effect2"> <a href="javascript:void(0);"><img src="~/Layout/images/gallery/pic1.jpg" alt=""></a> </li>
+                                    <li class="img-effect2"> <a href="javascript:void(0);"><img src="~/Layout/images/gallery/pic2.jpg" alt=""></a> </li>
+                                    <li class="img-effect2"> <a href="javascript:void(0);"><img src="~/Layout/images/gallery/pic3.jpg" alt=""></a> </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- footer bottom part -->
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12 text-right"> <span>© 1400 فارسی و راستچین شده</span> </div>
+                        <div class="col-md-6 col-sm-12 text-left">
+                            <div class="widget-link ">
+                                <ul>
+                                    <li><a href="help-desk.html"> میز راهنما</a></li>
+                                    <li><a href="privacy-policy.html"> سیاست حفظ حریم خصوصی</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Footer END -->
+        <button class="scroltop fa fa-chevron-up"></button>
+    </div>
+
+    <!-- Modal -->
+    @if (TempData["msg"] != null)
+    {
+        <div class="modal fade modal-bx-info modal-lg" id="report-reviews" tabindex="-1" role="dialog" aria-labelledby="ReportReviewsModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog " role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ReportReviewsModalLongTitle">پیام سیستم</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="la la-close"></i></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="clearfix">
+                            <p>@TempData["msg"]</p>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" data-dismiss="modal" class="site-button">بازگشت</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <!-- Modal End -->
+    <script>
+        $('#report-reviews').modal("toggle")
+    </script>
+</body>
+</html>

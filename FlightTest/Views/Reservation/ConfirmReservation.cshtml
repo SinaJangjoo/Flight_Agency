@@ -1,0 +1,206 @@
+﻿@{
+    var flight = TempData["flight"] as Flight;
+    var contries = TempData["countries"] as List<Country>;
+}
+@inject IHttpContextAccessor httpAccessor
+@inject UserManager<ApplicationUser> userManager
+
+@{
+    var user = await userManager.FindByNameAsync(User.Identity.Name);
+    var count = httpAccessor.HttpContext.Session.GetInt32("passengerCount");
+}
+@model ReservationViewModel
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <!-- Content -->
+    <div class="page-content bg-white">
+        <!-- inner page banner -->
+        <!-- inner page banner END -->
+        <!-- contact area -->
+        <div class="content-block">
+            <div class="section-full content-inner bg-white">
+                <div class="container">
+                    <div class="row d-flex flex-column align-items-center">
+                        <div class="col-lg-10">
+                            <div class="listing-filter m-b40">
+                                <div class="d-flex">
+                                    <div>
+                                        <h4>اطلاعات پرواز</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-lg-12">
+                                    <div class="listing-bx listing-half m-b30">
+                                        <div class="listing-media d-flex flex-column text-center">
+                                            <img src="@($"data:image/jpeg;base64,{Convert.ToBase64String(flight.Airline.LogoImage)}")" alt="">
+                                            <div>
+                                                <p class="text-black-50">ایرلاین:</p>
+                                                <h6>@flight.Airline.Name</h6>
+                                            </div>
+                                        </div>
+                                        <div class="listing-info w-100 d-flex flex-column">
+                                            <div class="col-12 text-center">
+                                                <h3 class="title">
+                                                    @($"{flight.ToCity.Name} {flight.ArrivalTime.Value.ToShortTimeString()} ")<i class="fa fa-fw fa-long-arrow-left fa-3x"></i>@($" {flight.DepartureTime.Value.ToShortTimeString()} {flight.FromCity.Name}")
+                                                </h3>
+                                            </div>
+                                            <div class="d-flex flex-row justify-content-around">
+                                                <div>
+                                                    <p class="text-black-50">هواپیما:</p>
+                                                    <h6>@flight.Airplane.Name</h6>
+                                                </div>
+                                                <div>
+                                                    <p class="text-black-50">کلاس پرواز:</p>
+                                                    <h6>@flight.ClassType.Name</h6>
+                                                </div>
+                                                <div>
+                                                    <p class="text-black-50">شماره پرواز:</p>
+                                                    <h6>@flight.FlightNumber</h6>
+                                                </div>
+                                                <div>
+                                                    <p class="text-black-50">بار مجاز:</p>
+                                                    <h6>@flight.AllowedCargoWeight کیلوگرم</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-column justify-content-around col-md-2">
+                                            <div>
+                                                <h5>قیمت:</h5>
+                                                <p>@($"{flight.Price:0,0}") تومان</p>
+                                            </div>
+                                            <h6 class="text-primary" style="color:red">@($"{flight.Capacity}") صندلی باقی مانده </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Pagination start -->
+                            <!-- Pagination END -->
+                        </div>
+                        <div class="col-lg-10 d-flex flex-column flex-sm-row">
+                            <div class="col-lg-6 border-1 mb-3 d-flex flex-column" style="background-color: rgba(77, 183, 254,0.3);border-radius:5px">
+                                <div class="row justify-content-around pt-2">
+                                    <div>
+                                        <h5>نام و نام خانوادگی :</h5>
+                                        @if (user.firstName != null && user.lastName != null)
+                                        {
+                                            <label>@($"{user.lastName} {user.firstName}")</label>
+
+                                        }
+                                        else
+                                        {
+                                            <label>--  --</label>
+                                        }
+                                    </div>
+                                    <div>
+                                        <h5>ایمیل :</h5>
+                                        <label>@user.Email</label>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-around">
+                                    <div>
+                                        <h5>شماره تلفن :</h5>
+                                        <label>@(user.PhoneNumber??="-- --")</label>
+                                    </div>
+                                    <div>
+                                        <h5>کد ملی :</h5>
+                                        <label>@(user.nationalCode??="-- --")</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6 d-flex flex-column ">
+                                <p class="reservation-info">
+                                    <i class="la la-info-circle" style="font-size:30px"></i>
+                                    لطفا قبل از پرداخت، اطلاعات مسافرین و جزئیات پرواز خود را مجددا بررسی نمایید و از صحت آن اطمینان حاصل کنید
+                                </p>
+                                <p class="reservation-info">
+                                    <i class="la la-info-circle" style="font-size:30px"></i>
+                                    بلیط صادر شده به صورت پیامک و ایمیل برای شما ارسال خواهد شد
+                                </p>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-10">
+                            <div class="sticky-top">
+                                <div class="listing-filter-sidebar d-flex flex-column">
+                                    <div>
+                                        <h4 class="title m-b30">اطلاعات مسافران</h4>
+                                    </div>
+                                    <div>
+                                        <table class="table table-bordered table-light table-responsive-md table-striped ">
+                                            <thead class="table-primary">
+                                                <tr>
+                                                    <th>نام و نام خانوادگی</th>
+                                                    <th>جنسیت</th>
+                                                    <th>تاریخ تولد</th>
+                                                    <th>کد ملی/شماره پاسپورت</th>
+                                                    <th>تابعیت</th>
+                                                    <th>کشور صادر کننده پاسپورت</th>
+                                                    <th>قیمت</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.passengers)
+                                                {
+
+                                                    var country = contries.SingleOrDefault(x => x.Id == item.birthCountryId).Name;
+                                                    string passportCountry = "--";
+                                                    @if (item.passportCountryId != null && item.passportCountryId != 0)
+                                                    {
+                                                        passportCountry = contries.SingleOrDefault(x => x.Id == item.passportCountryId).Name;
+                                                    }
+
+                                                    <tr>
+                                                        <td>@($"{item.latinFirstName} {item.latinLastName}")</td>
+                                                        <td>@(item.gender?"مرد":"زن")</td>
+                                                        <td>@item.birthDate.ToShortDateString()</td>
+                                                        @if (item.nationalCode != null)
+                                                        {
+                                                            <td>@item.nationalCode</td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td>@item.passportNumber</td>
+                                                        }
+                                                        <td>@country</td>
+                                                        <td>@passportCountry</td>
+                                                        <td>@($"{flight.Price:0,0}") تومان</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                        <table class="table table-bordered table-light text-center">
+                                            <tr>
+                                                <td>قیمت واحد</td>
+                                                <td style="width:25%">@($"{flight.Price:0,0}") تومان</td>
+                                            </tr>
+                                            <tr>
+                                                <td>مجموع بلیط ها</td>
+                                                <td> @($"{flight.Price:0,0}") x بلیط @count</td>
+                                            </tr>
+                                            <tr class="table-success">
+                                                <td>مبلغ قابل پرداخت</td>
+                                                <td>@($"{(flight.Price * count):0,0}") تومان</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col-lg-12 d-flex flex-row justify-content-end p-0">
+                                        <a asp-action="CheckOut" asp-controller="Transaction" asp-route-totalPrice="@(flight.Price * count)" class="btn btn-primary col-3">تایید و پرداخت</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- contact area END -->
+    </div>
+    <!-- Content END-->
+</body>
+</html>

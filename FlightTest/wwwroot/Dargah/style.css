@@ -1,0 +1,101 @@
+@font-face{
+    font-family: "font";
+    src: url("/Dargah/font/Tanha.ttf") format("woff");
+ }
+
+body{
+    font-family: "font";
+}
+
+
+
+
+
+.box-1{
+	background-color:rgb(92 189 245);
+	color:#000;
+    border-width: 2px;
+    border-radius:4px;
+    border-style: solid;
+    border-color: #ECECED;
+}
+
+h5{
+    color: #818492;
+}
+
+
+
+
+/*.box-2{
+    width:420px;
+	height:400px;
+	background:#fff;
+	color:#000;
+    border-radius:10px;
+    border-style: solid;
+    border-color: #ECECED;
+}*/
+
+
+.p-r{
+    text-align: right;
+}
+
+a{
+    color: white;
+}
+
+
+
+
+.input-cart{
+    width:80px;
+	height:40px;
+	background:#EFF0F4;
+    border-radius:3px;
+    border-style: solid;
+    border-width: 0px;
+    border-color: #e1e1e1;
+    text-align: center;
+    font-family: "font";
+}
+
+
+
+.input-phone{
+    width:350px;
+	height:40px;
+	background:#EFF0F4;
+    border-radius:3px;
+    border-style: solid;
+    border-width: 0px;
+    border-color: #e1e1e1;
+    text-align: center;
+    font-family: "font";
+}
+
+
+.input-mablagh{
+    width:230px;
+	height:40px;
+	background:#EFF0F4;
+    border-radius:3px;
+    border-style: solid;
+    border-width: 0px;
+    border-color: #e1e1e1;
+    text-align: center;
+    font-family: "font";
+}
+
+
+/*.input-submit{
+    width:350px;
+	height:50px;
+    border-radius:5px;
+    background: #0196F5;
+    border-style: solid;
+    border-width: 0px;
+    font-family: "font";
+    font-size: 17px;
+}*/

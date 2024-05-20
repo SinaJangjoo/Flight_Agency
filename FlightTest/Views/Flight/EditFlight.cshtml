@@ -1,0 +1,198 @@
+﻿
+@{
+    ViewData["Title"] = "EditFlight";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model FlightViewModel
+
+<html>
+<head>
+</head>
+<body>
+
+    <main class="ttr-wrapper">
+        <div class="container-fluid">
+            <div class="db-breadcrumb">
+                <h4 class="breadcrumb-title">ویرایش پرواز</h4>
+                <ul class="db-breadcrumb-list">
+                    <li><a href="#"><i class="fa fa-home"></i>...</a></li>
+                    <li>ویرایش پرواز</li>
+                </ul>
+            </div>
+            <div class="row">
+                <!-- Your Profile Views Chart -->
+                <div class="col-lg-12 m-b30">
+                    <div class="widget-box">
+                        <div class="wc-title">
+                            <h4>ویرایش پرواز</h4>
+                        </div>
+                        <div class="widget-inner">
+                            <form asp-action="EditFlightConfirm" asp-controller="Flight" asp-route-id="@((TempData["flight"]as Flight).Id)" class="edit-profile m-b30">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="ml-auto">
+                                            <h3>اطلاعات پرواز</h3>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label class="col-form-label">از:</label>
+                                        <div>
+                                            <select class="form-control" asp-for="fromCityId">
+                                                <option></option>
+                                                @foreach (var item in TempData["cities"] as List<City>)
+                                                {
+                                                    @if (item.Id==(TempData["flight"] as Flight).FromCityId)
+                                                    {
+                                                    <option value="@item.Id" selected>@item.Name</option>
+                                                    }
+                                                    else
+                                                    {
+                                                    <option value="@item.Id">@item.Name</option>
+                                                    }
+                                                }
+                                            </select>
+                                            <span asp-validation-for="fromCityId"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label class="col-form-label">به:</label>
+                                        <div>
+                                            <select class="form-control" asp-for="toCityId">
+                                                <option></option>
+                                                @foreach (var item in TempData["cities"] as List<City>)
+                                                {
+                                                    @if (item.Id == (TempData["flight"] as Flight).ToCityId)
+                                                    {
+                                                        <option value="@item.Id" selected>@item.Name</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@item.Id">@item.Name</option>
+                                                    }
+                                                }
+                                            </select>
+                                            <span asp-validation-for="toCityId"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label class="col-form-label">انتخاب ایرلاین:</label>
+                                        <div>
+                                            <select class="form-control" asp-for="airlineId">
+                                                <option></option>
+                                                @foreach (var item in TempData["airlines"] as List<Airline>)
+                                                {
+                                                    @if (item.Id == (TempData["flight"] as Flight).AirlineId)
+                                                    {
+                                                        <option value="@item.Id" selected>@item.Name</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@item.Id">@item.Name</option>
+                                                    }
+                                                }
+                                            </select>
+                                            <span asp-validation-for="airlineId"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label class="col-form-label">انتخاب هواپیما:</label>
+                                        <div>
+                                            <select class="form-control" asp-for="airplaneId">
+                                                <option></option>
+                                                @foreach (var item in TempData["airplanes"] as List<Airplane>)
+                                                {
+                                                    @if (item.Id == (TempData["flight"] as Flight).AirplaneId)
+                                                    {
+                                                        <option value="@item.Id" selected>@item.Name</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@item.Id">@item.Name</option>
+                                                    }
+                                                }
+                                            </select>
+                                            <span asp-validation-for="airplaneId"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label class="col-form-label">زمان شروع پرواز:</label>
+                                        <div>
+                                            <input value="@((TempData["flight"]as Flight).DepartureTime.Value)" asp-for="departureTime" class="form-control" type="datetime-local">
+                                        </div>
+                                        <span asp-validation-for="departureTime"></span>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label class="col-form-label">زمان پایان پرواز:</label>
+                                        <div>
+                                            <input value="@((TempData["flight"]as Flight).ArrivalTime.Value)" asp-for="arrivalTime" class="form-control" type="datetime-local">
+                                        </div>
+                                        <span asp-validation-for="arrivalTime"></span>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label class="col-form-label">انتخاب کلاس پرواز:</label>
+                                        <div>
+                                            <select class="form-control" asp-for="classTypeId">
+                                                <option></option>
+                                                @foreach (var item in TempData["classTypes"] as List<ClassType>)
+                                                {
+                                                    @if (item.Id == (TempData["flight"] as Flight).ClassTypeId)
+                                                    {
+                                                        <option value="@item.Id" selected>@item.Name</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@item.Id">@item.Name</option>
+                                                    }
+                                                }
+                                            </select>
+                                            <span asp-validation-for="classTypeId"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label class="col-form-label">شماره پرواز:</label>
+                                        <div>
+                                            <input value="@((TempData["flight"]as Flight).FlightNumber)" asp-for="flightNumber" class="form-control" type="text">
+                                        </div>
+                                        <span asp-validation-for="flightNumber"></span>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label class="col-form-label">مقدار بار مجاز:</label>
+                                        <div>
+                                            <input value="@((TempData["flight"]as Flight).AllowedCargoWeight)" asp-for="allowCargoWeight" class="form-control" type="number" step="5" />
+                                        </div>
+                                        <span asp-validation-for="allowCargoWeight"></span>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label class="col-form-label">ظرفیت:</label>
+                                        <div>
+                                            <input value="@((TempData["flight"]as Flight).Capacity)" asp-for="capacity" class="form-control" type="number">
+                                        </div>
+                                        <span asp-validation-for="capacity"></span>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label class="col-form-label">قیمت واحد:</label>
+                                        <div>
+                                            <input value="@((TempData["flight"]as Flight).Price)" asp-for="price" class="form-control" type="number">
+                                        </div>
+                                        <span asp-validation-for="price"></span>
+                                    </div>
+
+                                    <div class="seperator"></div>
+
+                                    <div class="col-12">
+                                        <button class="btn btn-primary"><i class="fa fa-fw fa-plus-circle"></i>ذخیره پرواز</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Your Profile Views Chart END-->
+            </div>
+        </div>
+    </main>
+
+
+</body>
+</html>
